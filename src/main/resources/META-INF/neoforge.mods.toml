@@ -8,6 +8,20 @@ version = "1.0.0"
 displayName = "Tint Guard"
 authors = "KokuuWork"
 description = '''
+让方块染色提供者不再把游戏打崩。
+
+有些模组的 BlockColor 会把传进来的方块状态无检查地强转成自己的方块类
+（例如 Waystones 的 ``(PortstoneBlock) state.getBlock()``）。而 Voxy / Roxy
+这类远景渲染模组在烘焙模型时会拿不相干的方块去问它，于是抛 ClassCastException，
+整个客户端直接退出。
+
+Tint Guard 在所有 BlockColor 注册进 BlockColors 时统一包一层保护：染色提供者
+抛异常时降级为「不染色」，而不是让游戏崩掉；真凶每个类只记一次日志，方便排查。
+
+仅客户端，零配置。
+
+---
+
 Makes every registered block colour provider exception-safe.
 
 Some mods register a BlockColor that blindly casts the queried block state to their own
