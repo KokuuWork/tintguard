@@ -1,0 +1,40 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "MIT"
+
+[[mods]]
+modId = "tintguard"
+version = "1.0.0"
+displayName = "Tint Guard"
+authors = "KokuuWork"
+description = '''
+Makes every registered block colour provider exception-safe.
+
+Some mods register a BlockColor that blindly casts the queried block state to their own
+block class (e.g. Waystones: ``(PortstoneBlock) state.getBlock()``). Far-render mods such as
+Voxy/Roxy query colour providers for unrelated blocks while baking models, so that cast
+throws ClassCastException and takes the whole client down.
+
+Tint Guard wraps every BlockColor registered into BlockColors with a guard: if a provider
+throws, the query degrades to "no tint" instead of crashing the game. The offender is
+logged once so the real cause stays discoverable.
+
+Client-side only. Zero configuration.
+'''
+
+[[mixins]]
+config = "tintguard.mixins.json"
+
+[[dependencies.tintguard]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1.0,)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.tintguard]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,1.22)"
+ordering = "NONE"
+side = "CLIENT"

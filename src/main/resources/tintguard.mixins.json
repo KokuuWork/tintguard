@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "minVersion": "0.8.7",
+  "package": "com.kokuustudio.tintguard.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "BlockColorsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

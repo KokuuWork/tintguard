@@ -1,0 +1,24 @@
+# Build output
+build/
+out/
+stubout/
+.gradle/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.eclipse/
+.settings/
+bin/
+.classpath
+.project
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Java
+*.class
+hs_err_pid*.log
+replay_pid*.log

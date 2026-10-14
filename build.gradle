@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev'
+}
+
+group = 'com.kokuustudio.tintguard'
+version = '1.0.0'
+
+base {
+    archivesName = 'tintguard'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+neoForge {
+    version = '21.1.249'
+
+    // Client-only mixin patch: no gameplay code, no runs required to build.
+    // Kept so `gradlew runClient` works if you want to debug in-game.
+    runs {
+        client {
+            client()
+        }
+    }
+
+    mods {
+        tintguard {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+// Deterministic jar name so release automation is simple.
+tasks.named('jar', Jar) {
+    archiveFileName = "tintguard-${project.version}.jar"
+}
